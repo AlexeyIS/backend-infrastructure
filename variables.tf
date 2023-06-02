@@ -59,47 +59,30 @@ variable "vpc_private_subents" {
 }
 
 ##############
-# Backend
+# ECR
 ##############
 
-# variable "instance_type" {
-#   description = "The EC2 instance type of the backend server"
-#   type        = string
-#   default     = "t3.medium"
-# }
-
+variable "ecr_repositories_names" {
+  description = "The names of the ECR respositories"
+  type        = list(any)
+}
 
 ##############
-# Frontend
+# Database
 ##############
+variable "db_master_username" {
+  description = "The database username of the RDS PostgresSQL cluster"
+  type        = string
+}
 
-# variable "frontend_domain" {
-#   description = "The domain name of the bucket for the website"
-#   type        = string
-# }
+variable "db_master_password" {
+  description = "The database username of the the RDS PostgresSQL cluster"
+  type        = string
+}
 
-
-# ##Database
-# variable "postgres_node_type" {
-#   description = "Postgres nodes instance type"
-#   type        = string
-#   default     = "db.t3.medium"
-# }
-
-# variable "db_master_username" {
-#   description = "The database username of the RDS PostgresSQL cluster"
-#   type        = string
-# }
-
-# variable "db_master_password" {
-#   description = "The database username of the the RDS PostgresSQL cluster"
-#   type        = string
-# }
-
-# variable "db_port" {
-#   description = "The database port for the RDS PostgresSQL cluster"
-#   type        = string
-#   default     = "5432"
-# }
+variable "preferred_backup_window" {
+  description = "The preferred timeframe to perfom the backup of the cluster on a daily basis"
+  type        = string
+}
 
 

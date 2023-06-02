@@ -1,5 +1,6 @@
 locals {
-  cluster_name = "${var.name}-cluster"
+  cluster_name  = "${var.name}-cluster"
+  database_name = "${var.name}-docdb-cluster"
 }
 
 module "network" {
@@ -53,4 +54,24 @@ module "charts" {
   cluster_name     = module.eks_cluster.cluster_name
   cluster_endpoint = module.eks_cluster.endpoint
   cluster_ca_cert  = module.eks_cluster.certificate_authority_data
+}
+
+
+resource "aws_docdb_cluster" "this" {
+  cluster_identifier      = "d211-db"
+  engine                  = "docdb"
+  master_username         = var.db_master_username
+  master_password         = var.db_master_password
+  preferred_backup_window = var.preferred_backup_window
+  skip_final_snapshot     = true
+}
+
+resource "aws_ecr_repository" "this" {
+  count                = length(var.ecr_repositories_names)
+  name                 = var.ecr_repositories_names[count.index]
+  image_tag_mutability = "MUTABLE"
+
+  image_scanning_configuration {
+    scan_on_push = true
+  }
 }

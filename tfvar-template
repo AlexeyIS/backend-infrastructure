@@ -20,3 +20,12 @@ vpc_azs = ["us-east-1a", "us-east-1b"]
 vpc_cidr            = "10.0.0.0/16"
 vpc_public_subents  = ["10.0.5.0/24", "10.0.6.0/24"]
 vpc_private_subents = ["10.0.1.0/24", "10.0.2.0/24"]
+
+
+# ----------------
+# Database DETAILS
+# ----------------
+
+db_master_username         = "foo"
+db_master_password         = "mustbeeightchars"
+preferred_backup_window    = "04:00-09:00"
