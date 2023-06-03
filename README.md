@@ -8,11 +8,9 @@ This repository is used to define core Networking and Kubernetes Cluster Infrast
 * Install aws cli - https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html
 * Use aws cli to configure a named profile, e.g., "aws configure"
 * Your credentials file should look like below(~/.aws/credentials)
-    > [profile-name]
-
-    > aws_access_key_id = AKIA3....
-
-    > aws_secret_access_key = u8kee0.....
+    > [profile-name] <br />
+    > aws_access_key_id = AKIA3.... <br />
+    > aws_secret_access_key = u8kee0..... <br />
 * Install kubectl - https://kubernetes.io/docs/tasks/tools/
 
 
