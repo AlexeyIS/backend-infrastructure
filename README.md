@@ -70,6 +70,7 @@ An environment its a combination of the following modules:
 ## IMPROVEMENTS FROM ORIGINAL ITERATION
 * ARGO CD for continous integration
 * Route 53 and Certificate manager setup
+* Add DynamoDB for state locking  - https://developer.hashicorp.com/terraform/language/settings/backends/s3
 
 ## TO-DO
 * review EKS module

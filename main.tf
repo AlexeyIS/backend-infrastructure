@@ -58,7 +58,7 @@ module "charts" {
 
 
 resource "aws_docdb_cluster" "this" {
-  cluster_identifier      = "d211-db"
+  cluster_identifier      = "${var.name}-docdb-cluster"
   engine                  = "docdb"
   master_username         = var.db_master_username
   master_password         = var.db_master_password
@@ -75,3 +75,4 @@ resource "aws_ecr_repository" "this" {
     scan_on_push = true
   }
 }
+
