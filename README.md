@@ -6,12 +6,14 @@ This repository is used to define core Networking and Kubernetes Cluster Infrast
 
 * Generate IAM access keys from the AWS console
 * Install aws cli - https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html
-* use aws cli to configure a named profile, e.g., "aws configure"
-* Your credentials file should look like below(~/.aws/credentials) assuming your profile named "dev"
-    > [<profile-name>]
-    > aws_access_key_id = AKIA3.....
-    > aws_secret_access_key = u8kee0......
-* Install kubectl
+* Use aws cli to configure a named profile, e.g., "aws configure"
+* Your credentials file should look like below(~/.aws/credentials)
+    > [profile-name]
+
+    > aws_access_key_id = AKIA3....
+
+    > aws_secret_access_key = u8kee0.....
+* Install kubectl - https://kubernetes.io/docs/tasks/tools/
 
 
 ## TOOLS OF THE TRADE
@@ -27,13 +29,14 @@ This repository is used to define core Networking and Kubernetes Cluster Infrast
 * EKS - Managed Kubernetes Service
 
 
+
 ## CREATING A NEW ENVIRONMENT
 
 An environment its a combination of the following modules:
 
 * network  - 2 tier network setup
 * eks - the majority of EKS cluster set up occurs here. AWS resources and some core helm charts
-
+* charts - all the helm charts to be installed after cluster creation, for now its only the nginx ingress controller
 
 #### Authentication
 
