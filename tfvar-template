@@ -29,3 +29,9 @@ vpc_private_subents = ["10.0.1.0/24", "10.0.2.0/24"]
 db_master_username         = "foo"
 db_master_password         = "mustbeeightchars"
 preferred_backup_window    = "04:00-09:00"
+
+
+# ----------------
+# ECR DETAILS
+# ----------------
+ecr_repositories_names = ["frontend", "backend"]
