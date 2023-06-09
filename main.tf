@@ -56,6 +56,12 @@ module "charts" {
   cluster_ca_cert  = module.eks_cluster.certificate_authority_data
 }
 
+resource "aws_docdb_cluster_instance" "cluster_instances" {
+  count              = 1
+  identifier         = "${var.name}-docdb-cluster-${count.index}"
+  cluster_identifier = "${var.name}-docdb-cluster"
+  instance_class     = var.db_instance_class
+}
 
 resource "aws_docdb_cluster" "this" {
   cluster_identifier      = "${var.name}-docdb-cluster"

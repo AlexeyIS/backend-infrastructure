@@ -35,3 +35,8 @@ preferred_backup_window    = "04:00-09:00"
 # ECR DETAILS
 # ----------------
 ecr_repositories_names = ["frontend", "backend"]
+
+# ----------------
+# DocumentDB DETAILS
+# ----------------
+db_instance_class = "db.t3.medium"
