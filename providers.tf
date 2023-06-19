@@ -10,9 +10,9 @@ terraform {
 
   ###Variables not allowed within here so all the following values needs to be hardcoded
   backend "s3" {
-    bucket  = "<precreated-bucket-name>"
+    bucket  = "test-state-12315j"
     key     = "terraform.tfstate"
-    profile = "<aws-profile>"
+    profile = "gdi"
     region  = "us-east-1"
   }
 }

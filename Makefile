@@ -20,12 +20,12 @@ clean:
 
 .PHONY: tf-plan
 tf-plan:
-	terraform fmt -recursive && terraform init && terraform validate && terraform plan -var-file <tf-var-file-name>.tfvars
+	terraform fmt -recursive && terraform init && terraform validate && terraform plan -var-file d211.tfvars
 
 .PHONY: tf-apply
 tf-apply:
-	terraform fmt -recursive && terraform init && terraform validate && terraform apply -var-file <tf-var-file-name>.tfvars -auto-approve
+	terraform fmt -recursive && terraform init && terraform validate && terraform apply -var-file d211.tfvars -auto-approve
 
 .PHONY: tf-destroy
 tf-destroy:
-	terraform init && terraform destroy -var-file <tf-var-file-name>.tfvars -auto-approve
+	terraform init && terraform destroy -var-file d211.tfvars -auto-approve

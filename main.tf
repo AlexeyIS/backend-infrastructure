@@ -1,11 +1,11 @@
 locals {
-  cluster_name  = "${var.name}-cluster"
-  database_name = "${var.name}-docdb-cluster"
+  cluster_name  = "${var.name}-cluster-${var.env}"
+  database_name = "${var.name}-docdb-cluster-${var.env}"
 }
 
 module "network" {
   source = "./modules/network"
-  name   = var.name
+  name   = "${var.name}-${var.env}"
 
   vpc_cidr = var.vpc_cidr
   azs      = var.vpc_azs
@@ -29,15 +29,15 @@ module "network" {
 module "eks_cluster" {
   depends_on = [module.network]
   source     = "./modules/eks"
-  name       = var.name
+  name       = "${var.name}-${var.env}"
 
   cluster_name           = local.cluster_name
   nodegroup_min_size     = 1
-  nodegroup_desired_size = 2
+  nodegroup_desired_size = 1
   subnet_ids             = module.network.private_subnets_ids
 
   root_disk_size     = 20
-  node_instance_type = "t3.medium"
+  node_instance_type = "t3.small"
 
   tags = {
     Terraform   = "true"
@@ -57,13 +57,32 @@ module "charts" {
 }
 
 
+resource "aws_db_subnet_group" "this" {
+  name       = "${var.name}-${var.env}-db_subnet_group"
+  subnet_ids = module.network.private_subnets_ids
+  tags = {
+    Terraform   = "true"
+    Environment = var.env
+  }
+}
+
+resource "aws_docdb_cluster_instance" "this" {
+  count              = 1
+  identifier         = "${var.name}-docdb-cluster-${var.env}-${count.index}"
+  cluster_identifier = "${var.name}-docdb-cluster-${var.env}"
+  instance_class     = var.db_instance_class
+  depends_on         = [aws_docdb_cluster.this]
+}
+
 resource "aws_docdb_cluster" "this" {
-  cluster_identifier      = "${var.name}-docdb-cluster"
+  cluster_identifier      = "${var.name}-docdb-cluster-${var.env}"
   engine                  = "docdb"
   master_username         = var.db_master_username
   master_password         = var.db_master_password
   preferred_backup_window = var.preferred_backup_window
+  db_subnet_group_name    = "${var.name}-${var.env}-db_subnet_group"
   skip_final_snapshot     = true
+  depends_on              = [aws_db_subnet_group.this]
 }
 
 resource "aws_ecr_repository" "this" {
@@ -75,4 +94,3 @@ resource "aws_ecr_repository" "this" {
     scan_on_push = true
   }
 }
-
