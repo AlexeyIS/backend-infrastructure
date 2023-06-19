@@ -85,4 +85,12 @@ variable "preferred_backup_window" {
   type        = string
 }
 
+variable "db_instance_class" {
+  description = "DocumentDB instance class"
+  type        = string
+}
+
+
+
+
 
